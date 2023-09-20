@@ -2,11 +2,10 @@ import 'package:dio/dio.dart';
 
 class ApiClient {
   late String baseUrl;
+  late Dio dio;
 
-  ApiClient({required baseUrl});
-
-  Dio get dio {
-    final dio = Dio(
+  ApiClient._({required this.baseUrl}) {
+    dio = Dio(
       BaseOptions(
         baseUrl: baseUrl,
         validateStatus: (_) => true,
@@ -15,8 +14,17 @@ class ApiClient {
         headers: {'accept': 'application/json'},
       ),
     );
+  }
 
-    return dio;
+  static ApiClient? _instance;
+
+  static ApiClient get instance {
+    assert(_instance != null, 'Api client must be initialized first.');
+    return _instance!;
+  }
+
+  static void initialize({required String baseUrl}) {
+    _instance = ApiClient._(baseUrl: baseUrl);
   }
 
   Response _validate(Response res) {

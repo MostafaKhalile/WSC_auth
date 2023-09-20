@@ -1,0 +1,1 @@
+library wsc_auth;

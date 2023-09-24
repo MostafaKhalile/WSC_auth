@@ -1,32 +1,38 @@
+import 'dart:convert';
+
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:wsc_auth/src/features/signup/data/models/signup_failed.dart';
+import 'package:wsc_auth/src/features/signup/data/models/user_model.dart';
 import 'package:wsc_auth/src/features/signup/signup_params.dart';
 import 'package:wsc_auth/utilities/api_client.dart';
-import 'package:wsc_auth/utilities/failure.dart';
 
-abstract class SignUpDataSource<T> {
-  Future<Either<CustomException,T>> signUp(SignupParams params);
+abstract class SignUpDataSource {
+  Future<Either<SignupFailed, UserModel>> signUp(SignupParamsInterface params);
 }
 
-class SignUpDataSourceImpl extends SignUpDataSource<Map> {
+class SignUpDataSourceImpl extends SignUpDataSource {
   final ApiClient apiClient;
   final String signUpPath;
 
   SignUpDataSourceImpl({required this.apiClient, required this.signUpPath});
 
+  /// This method is used to sign up a new user
+  /// takes [SignupParams] as a parameter
+  /// returns [Map] if the request is successful
+  /// returns [SignupFailed] if the request is failed
   @override
-  Future<Either<CustomException,Map>> signUp(SignupParams params) async{
+  Future<Either<SignupFailed, UserModel>> signUp(SignupParamsInterface params) async {
     Response? response;
     try {
-      response = await  apiClient.post(
+      response = await apiClient.post(
         signUpPath,
         body: params.toJson(),
       );
-      var data = response.data;
-      return data;
+      var data = UserModel.fromJson(jsonDecode(response.data));
+      return Right(data);
     } catch (e) {
-      return Left(SignupFailed(message: e.toString(),code: response?.data?.statusCode??500));
+      return Left(SignupFailed(message: e.toString(), code: 500));
     }
   }
 }

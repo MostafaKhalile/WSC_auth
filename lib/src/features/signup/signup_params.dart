@@ -1,23 +1,17 @@
-class SignupParams {
-  final String email;
-  final String password;
-  final String name;
+abstract class SignupParamsInterface {
 
-  SignupParams({
-    required this.email,
-    required this.password,
-    required this.name,
-  });
+  String? email;
+  String? phone;
+  String password;
+  String name;
 
-  toJson() => {
-        'email': email,
-        'password': password,
-        'name': name,
-      };
+  SignupParamsInterface(
+      {required email, required this.password, required this.name, required this.phone,})
+      :assert(
+  email != null || phone != null
+  );
 
-  factory SignupParams.fromJson(Map<String, dynamic> json) => SignupParams(
-        email: json['email'],
-        password: json['password'],
-        name: json['name'],
-      );
+
+  Map<String, dynamic> toJson();
+
 }

@@ -15,3 +15,4 @@ class SignupFailed implements CustomException {
   @override
   String? message;
 }
+

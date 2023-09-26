@@ -1,4 +1,5 @@
 name: wsc_auth
+publish_to: none
 description: A new Flutter package project.
 version: 0.0.2
 homepage:
@@ -8,10 +9,12 @@ environment:
   flutter: ">=1.17.0"
 
 dependencies:
+  bloc: ^8.1.2
   dio: ^5.3.2
   flutter:
     sdk: flutter
-
+  wsc_api_client:
+    git: https://github.com/WSCMultivendorSaas/WSC_api_client.git
 dev_dependencies:
   flutter_test:
     sdk: flutter

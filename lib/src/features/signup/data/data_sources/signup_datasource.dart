@@ -18,8 +18,8 @@ class SignUpDataSourceImpl extends SignUpDataSource {
   SignUpDataSourceImpl({required this.apiClient, required this.signUpPath});
 
   /// This method is used to sign up a new user
-  /// takes [SignupParams] as a parameter
-  /// returns [Map] if the request is successful
+  /// takes [SignupParamsInterface] as a parameter
+  /// returns [UserModel] if the request is successful
   /// returns [SignupFailed] if the request is failed
   @override
   Future<Either<SignupFailed, UserModel>> signUp(SignupParamsInterface params) async {
@@ -29,7 +29,7 @@ class SignUpDataSourceImpl extends SignUpDataSource {
         signUpPath,
         body: params.toJson(),
       );
-      var data = UserModel.fromJson(jsonDecode(response.data));
+      var data = ((response.data));
       return Right(data);
     } catch (e) {
       return Left(SignupFailed(message: e.toString(), code: 500));

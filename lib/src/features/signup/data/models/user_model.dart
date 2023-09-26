@@ -9,22 +9,24 @@ import 'package:wsc_auth/src/features/signup/domain/entities/user.dart';
 */
 
 class UserModel extends User {
-  UserModel(
-      {required super.id,
-      required super.name,
-      required super.email,
-      required super.phone,
-      required super.image,
-      required super.token});
+  const UserModel({
+    required super.id,
+    required super.name,
+    required super.email,
+    required super.phone,
+    required super.image,
+    required super.token,
+  });
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
     return UserModel(
-        id: json['id'],
-        name: json['name'],
-        email: json['email'],
-        phone: json['phone'],
-        image: json['image'],
-        token: json['token']);
+      id: json['id'],
+      name: json['name'],
+      email: json['email'],
+      phone: json['phone'],
+      image: json['image'],
+      token: json['token'],
+    );
   }
 
   Map<String, dynamic> toJson() {

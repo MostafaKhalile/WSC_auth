@@ -28,7 +28,7 @@ void main() {
     signUp = SignUpUseCaseImpl(repository: repository);
   });
 
-  final testUser = UserModel(
+  const testUser = UserModel(
     id: "1",
     name: "Test User",
     email: "",
@@ -40,7 +40,7 @@ void main() {
   test('should return user when sign up is successful', () async {
     // arrange
     when(() => repository.signUp(params)).thenAnswer(
-      (_) async => Right(testUser),
+      (_) async => const Right(testUser),
     );
 
     // act
@@ -50,7 +50,7 @@ void main() {
     expect(
       result,
       // Match the expected type to the actual type
-      Right(testUser),
+      const Right(testUser),
     );
     verify(() => repository.signUp(params));
     verifyNoMoreInteractions(repository);

@@ -9,7 +9,7 @@ import 'package:wsc_auth/src/features/signup/domain/entities/user.dart';
 */
 
 class UserModel extends User {
-  UserModel(
+  const UserModel(
       {required super.id,
       required super.name,
       required super.email,

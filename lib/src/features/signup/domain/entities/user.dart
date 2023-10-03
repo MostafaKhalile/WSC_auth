@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
 
 /*
 ╔═══════════════════════════════════════════════════╗
@@ -9,7 +8,6 @@ import 'package:flutter/material.dart';
 ╚═══════════════════════════════════════════════════╝
 */
 
-
 class User extends Equatable {
   final String id;
   final String name;
@@ -18,16 +16,14 @@ class User extends Equatable {
   final String image;
   final String token;
 
-  User({required this.id, required this.name, required this.email, required this.phone, required this.image, required this.token});
+  const User(
+      {required this.id,
+      required this.name,
+      required this.email,
+      required this.phone,
+      required this.image,
+      required this.token});
 
   @override
-  List<Object?> get props => [
-    id,
-    name,
-    email,
-    phone,
-    image,
-    token
-  ];
-
+  List<Object?> get props => [id, name, email, phone, image, token];
 }

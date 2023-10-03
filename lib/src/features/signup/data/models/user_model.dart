@@ -21,22 +21,12 @@ class UserModel extends User {
   factory UserModel.fromJson(Map<String, dynamic> json) {
     return UserModel(
       id: json['id'],
-      name: json['name'],
-      email: json['email'],
-      phone: json['phone'],
-      image: json['image'],
-      token: json['token'],
+      name: json['name']??'',
+      email: json['email']??'',
+      phone: json['phone']??'',
+      image: json['image']??'',
+      token: json['token']??'',
     );
   }
 
-  Map<String, dynamic> toJson() {
-    return {
-      'id': super.id,
-      'name': super.name,
-      'email': super.email,
-      'phone': super.phone,
-      'image': super.image,
-      'token': super.token
-    };
-  }
 }

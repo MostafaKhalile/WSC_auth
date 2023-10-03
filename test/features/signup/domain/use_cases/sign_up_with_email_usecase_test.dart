@@ -3,8 +3,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:wsc_auth/src/features/signup/data/models/user_model.dart';
 import 'package:wsc_auth/src/features/signup/domain/domain.dart';
-import 'package:wsc_auth/src/features/signup/domain/repositories/auth_repository.dart';
-import 'package:wsc_auth/src/features/signup/signup_params.dart';
+
+import '../../mocks/mock_signup_params.dart';
+import '../../mocks/mock_signup_repository.dart';
 
 /*
 ╔═══════════════════════════════════════════════════╗
@@ -14,34 +15,29 @@ import 'package:wsc_auth/src/features/signup/signup_params.dart';
 ╚═══════════════════════════════════════════════════╝
 */
 
-// Define mock classes for testing
-class MockSignUpRepository extends Mock implements AuthRepository {}
-
-class MockSignUpParams extends Mock implements SignupParamsInterface {}
+// Define a test user object for use in testing
+UserModel testUser = const UserModel(
+  id: "1",
+  name: "Test User",
+  email: "",
+  phone: "",
+  image: "",
+  token: "",
+);
 
 void main() {
   late MockSignUpRepository repository;
   late MockSignUpParams params;
   late SignUpUseCase signUp;
 
-  // Set up the test environment before each test case
+  /// Set up the test environment before each test case
   setUp(() {
     repository = MockSignUpRepository();
     params = MockSignUpParams();
     signUp = SignUpUseCaseImpl(repository: repository);
   });
 
-  // Define a test user object for use in testing
-  UserModel testUser = UserModel(
-    id: "1",
-    name: "Test User",
-    email: "",
-    phone: "",
-    image: "",
-    token: "",
-  );
-
-  // Test case for a successful sign up
+  /// Test case for a successful sign up
   test('should return user when sign up is successful', () async {
     // arrange
     when(() => repository.signUp(params)).thenAnswer(
@@ -52,16 +48,8 @@ void main() {
     final result = await signUp.execute(params);
 
     // assert
-    expect(
-      result,
-      // Match the expected type to the actual type
-      Right(testUser),
-    );
-
-    // Verify that the repository's signUp method was called
+    expect(result, Right(testUser));
     verify(() => repository.signUp(params));
-
-    // Verify that there are no more interactions with the repository
     verifyNoMoreInteractions(repository);
   });
 }

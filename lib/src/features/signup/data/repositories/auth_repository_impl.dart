@@ -11,7 +11,15 @@ class AuthRepositoryImpl extends AuthRepository {
   AuthRepositoryImpl(this.dataSource);
 
   @override
-  Future<Either<SignupFailed, UserModel>> signUp(SignupParamsInterface params) {
-    return dataSource.signUp(params);
+  Future<Either<SignupFailed, UserModel>> signUp(
+      SignupParamsInterface params) async {
+    try {
+      var results = await dataSource.signUp(params);
+      return Right(results);
+    }
+
+    catch (e) {
+      return Left(SignupFailed());
+    }
   }
 }

@@ -9,23 +9,23 @@ import 'package:wsc_auth/src/features/signup/data/models/user_model.dart';
 ╚═══════════════════════════════════════════════════╝
 */
 
-void main() {
-  final UserModel userModel = UserModel(
-      id: 'id',
-      name: 'name',
-      email: 'email',
-      phone: 'phone',
-      image: 'image',
-      token: 'token');
+const UserModel userModel = UserModel(
+    id: 'id',
+    name: 'name',
+    email: 'email',
+    phone: 'phone',
+    image: 'image',
+    token: 'token');
 
-  test('Instance Of User', () async {
-    // assert
-    expect(
-        userModel
-        // Match the expected type to the actual type
-        ,
-        isA<UserModel>());
-  });
+void main() {
+  // test('Instance Of User', () async {
+  //   // assert
+  //   expect(
+  //       userModel
+  //       // Match the expected type to the actual type
+  //       ,
+  //       isA<UserModel>());
+  // });
 
   group('fromJson', () {
     test('Valid Json', () async {

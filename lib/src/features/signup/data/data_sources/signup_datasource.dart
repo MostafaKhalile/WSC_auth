@@ -8,9 +8,12 @@ import 'package:wsc_auth/src/features/signup/data/models/user_model.dart';
 import 'package:wsc_auth/src/features/signup/signup_params.dart';
 import 'package:wsc_auth/utilities/failure.dart';
 
+
+
 abstract class SignUpDataSource {
   Future<UserModel> signUp(SignupParamsInterface params);
 }
+
 
 class SignUpDataSourceImpl implements SignUpDataSource {
   final ApiClient apiClient;
@@ -35,7 +38,7 @@ class SignUpDataSourceImpl implements SignUpDataSource {
       UserModel user = UserModel.fromJson(data);
       return (user);
     } catch (e) {
-      throw SignupFailed(message: e.toString(),code: response!.statusCode!);
+      throw SignupFailed(message: e.toString(),code: response?.statusCode??500);
     }
   }
 }

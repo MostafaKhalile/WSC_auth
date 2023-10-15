@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:wsc_auth/src/features/signup/domain/entities/user.dart';
+import 'package:wsc_auth/src/features/signup/data/models/user_model.dart';
 import 'package:wsc_auth/src/features/signup/domain/use_cases/sign_up_with_email_usecase.dart';
 import 'package:wsc_auth/src/features/signup/signup_params.dart';
 
@@ -12,10 +12,6 @@ part 'auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final SignUpUseCase useCase;
-
-  // static void init() {
-  //   AuthBloc bloc = AuthBloc(SignUpUseCaseImpl(repository: AuthRepositoryImpl(SignUpDataSourceImpl(apiClient: ApiClient.instance, signUpPath: 'signup/'))));
-  // }
 
   AuthBloc(this.useCase) : super(AuthInitial()) {
     on<SignUpEvent>(_signUp);
@@ -30,5 +26,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       )),
       (r) => emit(Authenticated(user: r)),
     );
+  }
+
+  Future<void> signUp(SignupParamsInterface params) async {
+    add(SignUpEvent(params:params));
   }
 }

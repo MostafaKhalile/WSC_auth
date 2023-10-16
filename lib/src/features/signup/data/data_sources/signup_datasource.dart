@@ -1,6 +1,3 @@
-import 'dart:convert';
-
-import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:wsc_api_client/wsc_api_client.dart';
 import 'package:wsc_auth/src/features/signup/data/models/signup_failed.dart';

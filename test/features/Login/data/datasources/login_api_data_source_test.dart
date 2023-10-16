@@ -1,68 +1,71 @@
+import 'dart:convert';
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:wsc_auth/core/error/exceptions.dart';
 import 'package:wsc_auth/src/features/Login/data/datasources/login_api_data_source.dart';
 import 'package:wsc_auth/src/features/Login/data/models/credentials_dto.dart';
+import 'package:wsc_auth/src/features/Login/data/models/jwt_token_model.dart';
 import 'package:wsc_auth/wsc_auth.dart';
 
 import '../../../../fixtures/fixture_reader.dart';
 
 class MockApiClient extends Mock implements ApiClient {}
 
-class MockDio extends Mock implements Dio {}
-
 void main() {
-  TestWidgetsFlutterBinding.ensureInitialized();
-  ApiClient.initialize(baseUrl: 'https://reqres.in/api/');
   late LoginAPIDatasourceImpl dataSource;
-  late MockDio mockDio;
-  final CredentialsDTO credentialsDTO =
-      CredentialsDTO('eve.holt@reqres.in', 'cityslicka');
-  setUp(() {
-    mockDio = MockDio();
-    ApiClient.instance.dio = mockDio;
-    dataSource = LoginAPIDatasourceImpl();
+  late CredentialsDTO credentialsDTO;
+  late MockApiClient mockApiClient;
+
+  setUpAll(() {
+    mockApiClient = MockApiClient();
+    dataSource = LoginAPIDatasourceImpl(mockApiClient);
+    credentialsDTO = CredentialsDTO('eve.holt@reqres.in', 'cityslicka');
   });
 
-  void setUpMockHttpClientSuccess200() {
-    when(() => mockDio.post(
-          any(),
-          data: any(named: 'data'),
-          queryParameters: any(named: 'queryParameters'),
-          options: any(named: 'options'),
-        )).thenAnswer((_) async => Response(
-          data: fixture('token_response.json'),
-          statusCode: 200,
-          requestOptions: RequestOptions(),
-        ));
-  }
+  group('LoginAPIDatasourceImpl', () {
+    test('should make a POST request with credentials and return JWTTokenModel',
+        () async {
+      // arrange
+      log('JWT ::${JWTTokenModel.fromJson(json.decode(fixture('token_response.json'))).toJson()}');
+      // Mock the response from the mockApiClient
+      when(() => mockApiClient.post(
+            any(),
+            body: credentialsDTO.toJson(),
+          )).thenAnswer((_) async => Response(
+            data: {"token": "QpwL5tke4Pnpja7X4"},
+            statusCode: 200,
+            requestOptions: RequestOptions(),
+          ));
 
-  group('Login DataSource', () {
-    test(
-      'should perform a POST request on a URL with CredentialsDTO being the endpoint and with application/json header',
-      () async {
-        // arrange
+      // act
+      final result = await dataSource.login(credentialsDTO);
 
-        final mockDio = ApiClient.instance.dio as MockDio;
+      // assert
+      verify(() => mockApiClient.post(
+            'login',
+            body: credentialsDTO.toJson(),
+          ));
+      expect(result, isA<JWTTokenModel>());
+    });
 
-        // Mock the response from Dio
-        setUpMockHttpClientSuccess200();
+    test('should return ServerException when the call to api is failed',
+        () async {
+      // arrange
+      when(() => mockApiClient.post(
+            any(),
+            body: credentialsDTO.toJson(),
+          )).thenAnswer((_) async => Response(
+            data: <String, dynamic>{},
+            statusCode: 500,
+            requestOptions: RequestOptions(),
+          ));
 
-        // act
-        await dataSource.login(credentialsDTO);
-
-        // assert
-        verify(() => mockDio.post(
-              'login',
-              data: credentialsDTO.toJson(),
-              options: Options(
-                headers: {
-                  'Accept': 'application/json',
-                  'Content-Type': 'application/json',
-                },
-              ),
-            ));
-      },
-    );
+      // assert
+      expect(dataSource.login(credentialsDTO),
+          throwsA(const TypeMatcher<ServerException>()));
+    });
   });
 }

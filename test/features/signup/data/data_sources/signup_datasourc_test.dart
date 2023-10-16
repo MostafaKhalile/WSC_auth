@@ -8,11 +8,12 @@ import 'package:wsc_auth/src/features/signup/data/models/user_model.dart';
 import 'package:wsc_auth/src/features/signup/signup_params.dart';
 
 class MockSignUpParams extends Mock implements SignupParamsInterface {}
+
 class MockApiClient extends Mock implements ApiClient {}
 
 const signUpPath = '/signup';
 void main() {
-  late  MockSignUpParams params;
+  late MockSignUpParams params;
   late SignUpParams paramsObj;
   late SignUpDataSource dataSource;
   late MockApiClient mockApiClient;
@@ -63,10 +64,7 @@ void main() {
       expect(params, isA<SignupParamsInterface>());
       expect(result, isA<UserModel>());
     });
-
-
   });
-
 
   group('Should return SignupFailed when the call to api is failed', () {
     setUp(() {
@@ -81,21 +79,21 @@ void main() {
     test('should return SignupFailed when the call to api is failed', () async {
       // arrange
       when(() => mockApiClient.post(
-        signUpPath,
-        body: paramsObj.toJson(),
-      )).thenAnswer((_) async => Response(
-        data: <String, dynamic>{},
-        statusCode: 500,
-        requestOptions: RequestOptions(path: ''),
-      ));
+            signUpPath,
+            body: paramsObj.toJson(),
+          )).thenAnswer((_) async => Response(
+            data: <String, dynamic>{},
+            statusCode: 500,
+            requestOptions: RequestOptions(path: ''),
+          ));
 
       // act
 
       // assert
-      expect(dataSource.signUp(paramsObj), throwsA(const TypeMatcher<SignupFailed>()));
+      expect(dataSource.signUp(paramsObj),
+          throwsA(const TypeMatcher<SignupFailed>()));
     });
   });
-
 }
 
 class SignUpParams extends SignupParamsInterface {
@@ -103,7 +101,6 @@ class SignUpParams extends SignupParamsInterface {
     required String email,
     required String password,
   }) : super(email: 'null', password: '', name: '', phone: '');
-
 
   @override
   Map<String, dynamic> toJson() => <String, dynamic>{

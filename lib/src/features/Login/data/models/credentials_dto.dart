@@ -1,28 +1,18 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:convert';
+import 'package:equatable/equatable.dart';
 
-class CredentialsDTO {
+class CredentialsDTO extends Equatable {
   final String email;
   final String password;
 
-  CredentialsDTO(this.email, this.password);
+  const CredentialsDTO({required this.email, required this.password});
 
-  Map<String, dynamic> toMap() {
+  Map<String, dynamic> toJson() {
     return <String, dynamic>{
       'email': email,
       'password': password,
     };
   }
 
-  factory CredentialsDTO.fromMap(Map<String, dynamic> map) {
-    return CredentialsDTO(
-      map['email'] as String,
-      map['password'] as String,
-    );
-  }
-
-  String toJson() => json.encode(toMap());
-
-  factory CredentialsDTO.fromJson(String source) =>
-      CredentialsDTO.fromMap(json.decode(source) as Map<String, dynamic>);
+  @override
+  List<Object?> get props => [email, password];
 }

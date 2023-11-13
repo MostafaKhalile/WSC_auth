@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:wsc_auth/src/features/Login/data/models/credentials_dto.dart';
 import 'package:wsc_auth/src/features/Login/domain/entities/jwt_token.dart';
 import 'package:wsc_auth/src/features/Login/domain/repositories/login_repository.dart';
 import 'package:wsc_auth/src/features/Login/domain/usecases/login_with_email.dart';
@@ -12,7 +13,7 @@ void main() {
   late final LogInUseCase useCase;
 
   setUp(() {
-    registerFallbackValue(Params(email: '', password: ''));
+    registerFallbackValue(const CredentialsDTO(email: '', password: ''));
 
     loginRepositoryMock = LoginRepositoryMock();
     useCase = LogInUseCase(loginRepositoryMock);
@@ -29,7 +30,7 @@ void main() {
       );
 
       // assert
-      Params params = Params(email: '', password: '');
+      CredentialsDTO params = CredentialsDTO(email: '', password: '');
       final result = await useCase(params);
       expect(result, const Right(tokenResponse));
       verify(() => loginRepositoryMock.loginWithEmail(params));

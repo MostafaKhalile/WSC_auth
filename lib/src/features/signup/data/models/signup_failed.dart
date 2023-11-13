@@ -1,11 +1,11 @@
 import 'package:equatable/equatable.dart';
 import 'package:wsc_auth/utilities/failure.dart';
 
-class SignupFailed  extends Equatable implements CustomException{
-   SignupFailed({
-   this.message,
+class SignupFailed extends Equatable implements CustomException {
+  SignupFailed({
+    this.message,
     this.code,
-  }):super();
+  }) : super();
 
   @override
   String toString() => 'SignupFailed{message: $message, code: $code}';
@@ -19,4 +19,3 @@ class SignupFailed  extends Equatable implements CustomException{
   @override
   List<Object?> get props => [code, message];
 }
-

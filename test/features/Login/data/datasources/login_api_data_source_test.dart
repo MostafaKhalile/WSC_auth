@@ -22,7 +22,8 @@ void main() {
   setUpAll(() {
     mockApiClient = MockApiClient();
     dataSource = LoginAPIDatasourceImpl(mockApiClient);
-    credentialsDTO = CredentialsDTO('eve.holt@reqres.in', 'cityslicka');
+    credentialsDTO = const CredentialsDTO(
+        email: 'eve.holt@reqres.in', password: 'cityslicka');
   });
 
   group('LoginAPIDatasourceImpl', () {
@@ -35,7 +36,7 @@ void main() {
             any(),
             body: credentialsDTO.toJson(),
           )).thenAnswer((_) async => Response(
-            data: {"token": "QpwL5tke4Pnpja7X4"},
+            data: json.decode(fixture('token_response.json')),
             statusCode: 200,
             requestOptions: RequestOptions(),
           ));
@@ -51,7 +52,8 @@ void main() {
       expect(result, isA<JWTTokenModel>());
     });
 
-    test('should return ServerException when the call to api is failed',
+    test(
+        'should return ServerException when the call to api is failed to get token',
         () async {
       // arrange
       when(() => mockApiClient.post(
@@ -59,7 +61,7 @@ void main() {
             body: credentialsDTO.toJson(),
           )).thenAnswer((_) async => Response(
             data: <String, dynamic>{},
-            statusCode: 500,
+            statusCode: 404,
             requestOptions: RequestOptions(),
           ));
 

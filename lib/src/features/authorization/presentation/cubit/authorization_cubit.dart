@@ -13,6 +13,6 @@ class OAuthCubit extends Cubit<OAuthState> {
     emit(OAuthLoading());
     final res = await useCase(dto);
     res.fold((l) => emit(OAuthFailed(l.toString())),
-        (r) => emit(OAuthSuccess(token: r.token)));
+        (r) => emit(OAuthSuccess(token: r.accessToken)));
   }
 }

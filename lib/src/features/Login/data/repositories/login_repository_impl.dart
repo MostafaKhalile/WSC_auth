@@ -1,8 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:wsc_auth/core/error/failures.dart';
-import 'package:wsc_auth/src/features/Login/domain/repositories/login_repository.dart';
 import 'package:wsc_auth/src/features/login/data/datasources/login_api_data_source.dart';
-import 'package:wsc_auth/src/features/login/data/models/credentials_dto.dart';
 import 'package:wsc_auth/wsc_auth.dart';
 
 class LoginRepositoryImp extends LoginRepository {

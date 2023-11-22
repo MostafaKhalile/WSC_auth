@@ -2,7 +2,7 @@
 FLUTTER_ROOT=C:\src\flutter
 FLUTTER_APPLICATION_PATH=C:\Users\mosta\Development\Multi_vendor_showcase\wsc_auth
 COCOAPODS_PARALLEL_CODE_SIGN=true
-FLUTTER_TARGET=lib/main.dart
+FLUTTER_TARGET=lib\main.dart
 FLUTTER_BUILD_DIR=build
 FLUTTER_BUILD_NAME=0.0.2
 FLUTTER_BUILD_NUMBER=0.0.2

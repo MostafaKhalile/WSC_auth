@@ -1,5 +1,4 @@
 import 'package:wsc_auth/core/error/exceptions.dart';
-import 'package:wsc_auth/src/features/login/data/models/credentials_dto.dart';
 
 import '../../../../../wsc_auth.dart';
 

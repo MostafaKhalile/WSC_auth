@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:wsc_auth/core/error/exceptions.dart';
 import 'package:wsc_auth/src/features/authorization/data/models/access_token_model.dart';
 
@@ -19,8 +20,10 @@ class OAuthAPIDataImpl implements OAuthAPIDataSource {
     String path = 'connect/token',
   }) async {
     try {
-      final response =
-          await apiClient.post(path, body: oAuthDTO.toJson(), isFormData: true);
+      final response = await apiClient.post(path,
+          body: oAuthDTO.toJson(),
+          isFormData: true,
+          contentType: Headers.formUrlEncodedContentType);
       return AccessTokenModel.fromJson(response.data);
     } catch (e) {
       throw ServerException();

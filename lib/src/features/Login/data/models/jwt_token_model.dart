@@ -1,4 +1,4 @@
-import 'package:wsc_auth/src/features/Login/domain/entities/jwt_token.dart';
+import 'package:wsc_auth/src/features/login/domain/entities/jwt_token.dart';
 
 class JWTTokenModel extends JWTToken {
   const JWTTokenModel({required super.token});

@@ -3,10 +3,10 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:wsc_auth/core/error/failures.dart';
-import 'package:wsc_auth/src/features/Login/data/models/credentials_dto.dart';
-import 'package:wsc_auth/src/features/Login/domain/entities/jwt_token.dart';
-import 'package:wsc_auth/src/features/Login/domain/usecases/login_with_email.dart';
-import 'package:wsc_auth/src/features/Login/presentation/cubit/login_cubit.dart';
+import 'package:wsc_auth/src/features/login/data/models/credentials_dto.dart';
+import 'package:wsc_auth/src/features/login/domain/entities/jwt_token.dart';
+import 'package:wsc_auth/src/features/login/domain/usecases/login_with_email.dart';
+import 'package:wsc_auth/src/features/login/presentation/cubit/login_cubit.dart';
 
 class LogInUseCaseMock extends Mock implements LogInUseCase {}
 

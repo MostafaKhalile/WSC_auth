@@ -5,9 +5,9 @@ import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:wsc_auth/core/error/exceptions.dart';
-import 'package:wsc_auth/src/features/Login/data/datasources/login_api_data_source.dart';
-import 'package:wsc_auth/src/features/Login/data/models/credentials_dto.dart';
-import 'package:wsc_auth/src/features/Login/data/models/jwt_token_model.dart';
+import 'package:wsc_auth/src/features/login/data/datasources/login_api_data_source.dart';
+import 'package:wsc_auth/src/features/login/data/models/credentials_dto.dart';
+import 'package:wsc_auth/src/features/login/data/models/jwt_token_model.dart';
 import 'package:wsc_auth/wsc_auth.dart';
 
 import '../../../../fixtures/fixture_reader.dart';

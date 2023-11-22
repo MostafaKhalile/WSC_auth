@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:wsc_auth/src/features/Login/presentation/cubit/login_cubit.dart';
+import 'package:wsc_auth/src/features/login/presentation/cubit/login_cubit.dart';
 
 void main() {
   late LoginState state;

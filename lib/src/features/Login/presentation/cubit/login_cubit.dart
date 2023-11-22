@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:wsc_auth/src/features/login/data/models/credentials_dto.dart';
 
-import '../../data/models/credentials_dto.dart';
 import '../../domain/usecases/login_with_email.dart';
 
 part 'login_state.dart';

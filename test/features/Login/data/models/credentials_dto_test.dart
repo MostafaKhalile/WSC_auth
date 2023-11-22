@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:wsc_auth/src/features/Login/data/models/credentials_dto.dart';
+import 'package:wsc_auth/src/features/login/data/models/credentials_dto.dart';
 
 void main() {
   const credentialsDTO = CredentialsDTO(

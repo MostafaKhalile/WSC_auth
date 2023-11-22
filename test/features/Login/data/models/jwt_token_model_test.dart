@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:wsc_auth/src/features/Login/data/data.dart';
-import 'package:wsc_auth/src/features/Login/domain/entities/jwt_token.dart';
+import 'package:wsc_auth/src/features/login/data/data.dart';
+import 'package:wsc_auth/src/features/login/domain/entities/jwt_token.dart';
 
 import '../../../../fixtures/fixture_reader.dart';
 

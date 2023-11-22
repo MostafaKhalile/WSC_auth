@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:wsc_auth/src/features/Login/data/models/credentials_dto.dart';
+import 'package:wsc_auth/src/features/login/data/models/credentials_dto.dart';
 
 import '../../../../../core/error/failures.dart';
 import '../../../../../core/usecases/usecase.dart';

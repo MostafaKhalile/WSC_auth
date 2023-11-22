@@ -1,8 +1,7 @@
 import 'package:wsc_auth/core/error/exceptions.dart';
-import 'package:wsc_auth/src/features/Login/data/models/credentials_dto.dart';
+import 'package:wsc_auth/src/features/login/data/models/credentials_dto.dart';
 
 import '../../../../../wsc_auth.dart';
-import '../models/jwt_token_model.dart';
 
 abstract class LogInAPIDataSource {
   Future<JWTTokenModel?> login(CredentialsDTO credentialsDTO);

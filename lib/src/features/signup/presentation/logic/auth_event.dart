@@ -4,7 +4,7 @@ abstract class AuthEvent extends Equatable {
   const AuthEvent();
 }
 
-class SignUpEvent<T> extends AuthEvent {
+class SignUpEvent extends AuthEvent {
   final SignupParamsInterface params;
 
   const SignUpEvent({required this.params});

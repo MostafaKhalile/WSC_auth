@@ -19,7 +19,8 @@ class OAuthAPIDataImpl implements OAuthAPIDataSource {
     String path = 'connect/token',
   }) async {
     try {
-      final response = await apiClient.post(path, body: oAuthDTO.toJson());
+      final response =
+          await apiClient.post(path, body: oAuthDTO.toJson(), isFormData: true);
       return AccessTokenModel.fromJson(response.data);
     } catch (e) {
       throw ServerException();

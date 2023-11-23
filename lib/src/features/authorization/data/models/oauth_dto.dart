@@ -1,36 +1,32 @@
 class OAuthDTO {
   OAuthDTO({
-    required this.grantType,
     required this.clientId,
-    required this.clientSecret,
-    required this.scope,
-    required this.userName,
+    required this.username,
     required this.password,
+    required this.scope,
+    required this.grantType,
   });
-  late final String grantType;
   late final String clientId;
-  late final String clientSecret;
-  late final String scope;
-  late final String userName;
+  late final String username;
   late final String password;
+  late final String scope;
+  late final String grantType;
 
   OAuthDTO.fromJson(Map<String, dynamic> json) {
-    grantType = json['grant_type'];
     clientId = json['client_id'];
-    clientSecret = json['client_secret'];
-    scope = json['Scope'];
-    userName = json['username'];
+    username = json['username'];
     password = json['password'];
+    scope = json['scope'];
+    grantType = json['grant_type'];
   }
 
   Map<String, dynamic> toJson() {
     final _data = <String, dynamic>{};
-    _data['grant_type'] = grantType;
     _data['client_id'] = clientId;
-    _data['client_secret'] = clientSecret;
-    _data['Scope'] = scope;
-    _data['username'] = userName;
+    _data['username'] = username;
     _data['password'] = password;
+    _data['scope'] = scope;
+    _data['grant_type'] = grantType;
     return _data;
   }
 }

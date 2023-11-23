@@ -20,10 +20,9 @@ class OAuthAPIDataImpl implements OAuthAPIDataSource {
   }) async {
     Response? response;
     try {
-      response = await apiClient.post(
-        path,
-        body: oAuthDTO.toJson(),
-      );
+      response = await apiClient.post(path,
+          body: oAuthDTO.toJson(),
+          contentType: 'application/x-www-form-urlencoded');
       return AccessTokenModel.fromJson(response.data);
     } catch (e) {
       throw OAuthFailed(

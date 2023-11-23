@@ -23,7 +23,7 @@ class OAuthAPIDataImpl implements OAuthAPIDataSource {
       final response = await apiClient.post(path,
           body: oAuthDTO.toJson(),
           isFormData: true,
-          contentType: Headers.formUrlEncodedContentType);
+          contentType: 'application/x-www-form-urlencoded');
       return AccessTokenModel.fromJson(response.data);
     } catch (e) {
       throw ServerException();

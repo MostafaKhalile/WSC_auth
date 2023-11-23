@@ -26,7 +26,7 @@ class OAuthAPIDataImpl implements OAuthAPIDataSource {
           contentType: 'application/x-www-form-urlencoded');
       return AccessTokenModel.fromJson(response.data);
     } catch (e) {
-      throw LoginFailed(
+      throw OAuthFailed(
           response?.data['error'] ?? response?.data['error_description']);
     }
   }

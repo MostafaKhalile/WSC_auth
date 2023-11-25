@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => getIt<OAuthCubit>(),
+      create: (context) => getItInjector<OAuthCubit>(),
       child: MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(

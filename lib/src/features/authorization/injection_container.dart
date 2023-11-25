@@ -2,19 +2,19 @@ import 'package:wsc_auth/wsc_auth.dart';
 
 Future<void> initOAuthFeature() async {
   // Bloc
-  getIt.registerFactory<OAuthCubit>(() => OAuthCubit(
-        getIt(),
+  getItInjector.registerFactory<OAuthCubit>(() => OAuthCubit(
+        getItInjector(),
       ));
 
   // Use cases
-  getIt.registerLazySingleton(() => AuthorizeUseCase(getIt()));
+  getItInjector.registerLazySingleton(() => AuthorizeUseCase(getItInjector()));
 
   // Repository
-  getIt.registerLazySingleton<OAuthRepository>(() => OAuthRepositoryImp(
-        getIt(),
+  getItInjector.registerLazySingleton<OAuthRepository>(() => OAuthRepositoryImp(
+        getItInjector(),
       ));
 
   // Data sources
-  getIt.registerLazySingleton<OAuthAPIDataSource>(
-      () => OAuthAPIDataImpl(getIt()));
+  getItInjector.registerLazySingleton<OAuthAPIDataSource>(
+      () => OAuthAPIDataImpl(getItInjector()));
 }

@@ -10,6 +10,6 @@ class WSCAuth {
     assert(baseURL.startsWith('https') || baseURL.startsWith('http'),
         'The url should start with http/https');
     ApiClient.initialize(baseUrl: baseURL);
-    await init();
+    await boot();
   }
 }

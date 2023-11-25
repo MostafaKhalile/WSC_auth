@@ -5,7 +5,7 @@ import 'wsc_auth.dart';
 
 final getItInjector = GetIt.instance;
 
-Future<void> init() async {
+Future<void> boot() async {
   //External
   getItInjector.registerLazySingleton(() => ApiClient.instance);
   initOAuthFeature();
